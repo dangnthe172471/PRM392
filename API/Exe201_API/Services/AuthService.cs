@@ -28,8 +28,11 @@ namespace Exe201_API.Services
             {
                 UserId = user.Id,
                 Email = user.Email,
-                Role = user.Role
-            };
+                Role = user.Role,
+                Name = user.Name,
+				Phone = user.Phone,
+				Address = user.Address
+			};
         }
 
         public async Task<LoginResponseDto> RegisterAsync(RegisterRequestDto request)
@@ -50,12 +53,15 @@ namespace Exe201_API.Services
             };
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
-            return new LoginResponseDto
-            {
-                UserId = user.Id,
-                Email = user.Email,
-                Role = user.Role
-            };
+			return new LoginResponseDto
+			{
+				UserId = user.Id,
+				Email = user.Email,
+				Role = user.Role,
+				Name = user.Name,
+				Phone = user.Phone,
+				Address = user.Address
+			};
         }
 
         public async Task<bool> ChangePasswordAsync(ChangePasswordRequestDto request)
