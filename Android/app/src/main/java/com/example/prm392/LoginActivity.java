@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtEmail, edtPassword;
     private Button btnLogin;
     private TextView tvRegister;
+    private TextView tvForgotPassword;
     private ApiService apiService;
 
     @Override
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvRegister = findViewById(R.id.tvRegister);
+        tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
         apiService = ApiService.api;
 
@@ -67,6 +69,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            }
+        });
+
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
             }
         });
     }
