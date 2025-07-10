@@ -9,10 +9,14 @@ namespace Exe201_API.Services
     public class AuthService : IAuthService
     {
         private readonly CareUContext _context;
+        private readonly IEmailService _emailService;
+        private readonly Random _random;
 
-        public AuthService(CareUContext context)
+        public AuthService(CareUContext context, IEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
+            _random = new Random();
         }
 
         public async Task<LoginResponseDto> LoginAsync(LoginRequestDto request)
@@ -116,6 +120,91 @@ namespace Exe201_API.Services
             await _context.SaveChangesAsync();
 
             return await GetUserProfileAsync(userId);
+        }
+
+        public async Task<bool> ForgotPasswordAsync(ForgotPasswordRequestDto request)
+        {
+            // Kiểm tra email có tồn tại không
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            if (user == null)
+                throw new ArgumentException("Email không tồn tại trong hệ thống");
+
+            // Xóa các PIN cũ của email này
+            var oldPins = await _context.PasswordResetPins
+                .Where(p => p.Email == request.Email)
+                .ToListAsync();
+            _context.PasswordResetPins.RemoveRange(oldPins);
+
+            // Tạo mã PIN mới (6 số)
+            var pin = _random.Next(100000, 999999).ToString();
+            
+            // Tạo record mới với thời gian hết hạn 5 phút
+            var resetPin = new PasswordResetPin
+            {
+                Email = request.Email,
+                Pin = pin,
+                CreatedAt = DateTime.UtcNow,
+                ExpiresAt = DateTime.UtcNow.AddMinutes(5),
+                IsUsed = false
+            };
+
+            _context.PasswordResetPins.Add(resetPin);
+            await _context.SaveChangesAsync();
+
+            // Gửi email với mã PIN
+            var emailSent = await _emailService.SendPasswordResetPinAsync(request.Email, pin);
+            if (!emailSent)
+                throw new Exception("Không thể gửi email. Vui lòng thử lại sau.");
+
+            return true;
+        }
+
+        public async Task<bool> VerifyPinAsync(VerifyPinRequestDto request)
+        {
+            // Tìm PIN hợp lệ
+            var resetPin = await _context.PasswordResetPins
+                .Where(p => p.Email == request.Email && 
+                           p.Pin == request.Pin && 
+                           !p.IsUsed && 
+                           p.ExpiresAt > DateTime.UtcNow)
+                .OrderByDescending(p => p.CreatedAt)
+                .FirstOrDefaultAsync();
+
+            if (resetPin == null)
+                throw new ArgumentException("Mã PIN không hợp lệ hoặc đã hết hạn");
+
+            return true;
+        }
+
+        public async Task<bool> ResetPasswordAsync(ResetPasswordRequestDto request)
+        {
+            // Tìm PIN hợp lệ
+            var resetPin = await _context.PasswordResetPins
+                .Where(p => p.Email == request.Email && 
+                           p.Pin == request.Pin && 
+                           !p.IsUsed && 
+                           p.ExpiresAt > DateTime.UtcNow)
+                .OrderByDescending(p => p.CreatedAt)
+                .FirstOrDefaultAsync();
+
+            if (resetPin == null)
+                throw new ArgumentException("Mã PIN không hợp lệ hoặc đã hết hạn");
+
+            // Tìm user
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            if (user == null)
+                throw new ArgumentException("Không tìm thấy người dùng");
+
+            // Cập nhật mật khẩu mới
+            user.Password = request.NewPassword; // Note: In a real app, hash this password!
+            user.UpdatedAt = DateTime.UtcNow;
+
+            // Đánh dấu PIN đã sử dụng
+            resetPin.IsUsed = true;
+
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 } 
