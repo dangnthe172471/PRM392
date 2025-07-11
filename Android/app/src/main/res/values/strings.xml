@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Prm392</string>
+    <string name="edit_profile_title">Chỉnh sửa thông tin cá nhân</string>
+    <string name="hint_name">Họ và tên</string>
+    <string name="hint_phone">Số điện thoại</string>
+    <string name="hint_address">Địa chỉ</string>
+    <string name="save_changes">Lưu thay đổi</string>
+    <string name="desc_icon_name">Biểu tượng họ tên</string>
+    <string name="desc_icon_phone">Biểu tượng số điện thoại</string>
+    <string name="desc_icon_address">Biểu tượng địa chỉ</string>
 </resources>
