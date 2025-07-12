@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.prm392.Retrofit.AccountManager;
 import com.example.prm392.adapter.ServiceAdapter;
 import com.example.prm392.database.ServiceRepository;
 import com.example.prm392.model.ServiceModel;
@@ -73,7 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 // startActivity(new Intent(MainActivity.this, ChatActivity.class));
                 return true;
             } else if (id == R.id.nav_profile) {
-                // startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                int userId = AccountManager.getUserId(this);
+                if(userId != -1) {
+                    startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                } else {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
                 return true;
             }
 

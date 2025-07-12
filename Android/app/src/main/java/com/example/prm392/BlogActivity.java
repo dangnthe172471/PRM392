@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.prm392.Retrofit.AccountManager;
 import com.example.prm392.adapter.BlogAdapter;
 import com.example.prm392.database.BlogRepository;
 import com.example.prm392.model.BlogModel;
@@ -75,7 +76,12 @@ public class BlogActivity extends AppCompatActivity {
                 // startActivity(new Intent(BlogActivity.this, ChatActivity.class));
                 return true;
             } else if (id == R.id.nav_profile) {
-                // startActivity(new Intent(BlogActivity.this, ProfileActivity.class));
+                int userId = AccountManager.getUserId(this);
+                if(userId != -1) {
+                    startActivity(new Intent(BlogActivity.this, ProfileActivity.class));
+                } else {
+                    startActivity(new Intent(BlogActivity.this, LoginActivity.class));
+                }
                 return true;
             }
 
