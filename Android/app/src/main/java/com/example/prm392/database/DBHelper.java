@@ -7,9 +7,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DBHelper {
-    private static final String ip = "192.168.1.243";
+    private static final String ip = "10.0.2.2";
     private static final String port = "1433";
-    private static final String dbName = "CareU2";
+    private static final String dbName = "CareU";
     private static final String username = "sa";
     private static final String password = "123";
 
