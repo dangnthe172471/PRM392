@@ -49,6 +49,12 @@ public class ServiceAdapter extends RecyclerView.Adapter<ServiceAdapter.ServiceV
         return serviceList.size();
     }
 
+    public void updateData(List<ServiceModel> newList) {
+        serviceList.clear();
+        serviceList.addAll(newList);
+        notifyDataSetChanged();
+    }
+
     public static class ServiceViewHolder extends RecyclerView.ViewHolder {
         TextView tvWorkerName, tvServiceType, tvPrice, tvRating;
         ImageView imgWorker;
