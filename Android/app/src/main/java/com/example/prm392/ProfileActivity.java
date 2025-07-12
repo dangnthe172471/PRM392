@@ -23,6 +23,7 @@ public class ProfileActivity extends AppCompatActivity {
     private LinearLayout layoutExperience;
     private Button btnEditProfile, btnLogout;
     private ApiService apiService;
+    private UserProfile currentProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,12 @@ public class ProfileActivity extends AppCompatActivity {
         
         // Set up click listeners
         setupClickListeners();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadUserProfile();
     }
 
     private void initViews() {
@@ -84,6 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void displayUserProfile(UserProfile profile) {
+        currentProfile = profile;
         // Set basic information
         tvName.setText(profile.getName());
         tvEmail.setText(profile.getEmail());
@@ -143,8 +151,15 @@ public class ProfileActivity extends AppCompatActivity {
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Implement edit profile functionality
-                Toast.makeText(ProfileActivity.this, "Tính năng đang phát triển", Toast.LENGTH_SHORT).show();
+                if (currentProfile != null) {
+                    Intent intent = new Intent(ProfileActivity.this, EditProfileActivity.class);
+                    intent.putExtra("name", currentProfile.getName());
+                    intent.putExtra("phone", currentProfile.getPhone());
+                    intent.putExtra("address", currentProfile.getAddress());
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Chưa có thông tin người dùng", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

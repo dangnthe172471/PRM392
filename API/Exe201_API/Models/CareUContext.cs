@@ -37,6 +37,8 @@ public partial class CareUContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<PasswordResetPin> PasswordResetPins { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var builder = new ConfigurationBuilder()
@@ -191,6 +193,16 @@ public partial class CareUContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Notificat__UserI__619B8048");
+        });
+
+        modelBuilder.Entity<PasswordResetPin>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__PasswordResetPin__Id");
+            entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.Pin).HasMaxLength(6);
+            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getutcdate())");
+            entity.Property(e => e.ExpiresAt).IsRequired();
+            entity.Property(e => e.IsUsed).HasDefaultValue(false);
         });
 
         modelBuilder.Entity<Payment>(entity =>

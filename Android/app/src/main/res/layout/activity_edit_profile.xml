@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E3F0FF"
+    tools:context=".EditProfileActivity">
+
+    <!-- Tiêu đề -->
+
+    <!-- Họ và tên -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:text="@string/edit_profile_title"
+        android:textColor="#1976D2"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtFullName"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="24dp"
+        android:autofillHints="name"
+        android:background="@drawable/edittext_background_blue"
+        android:hint="@string/hint_name"
+        android:inputType="textPersonName"
+        android:paddingStart="44dp"
+        android:paddingEnd="12dp"
+        android:textColor="#222"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+    <!-- Số điện thoại -->
+
+    <ImageView
+        android:id="@+id/imgName"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/desc_icon_name"
+        android:src="@drawable/ic_person_24"
+        app:layout_constraintEnd_toEndOf="@+id/edtFullName"
+        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintStart_toStartOf="@+id/edtFullName"
+        app:layout_constraintTop_toTopOf="@+id/edtFullName"
+        app:tint="#1976D2" />
+
+    <EditText
+        android:id="@+id/edtPhone"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="24dp"
+        android:autofillHints="phone"
+        android:background="@drawable/edittext_background_blue"
+        android:hint="@string/hint_phone"
+        android:inputType="phone"
+        android:paddingStart="44dp"
+        android:paddingEnd="12dp"
+        android:textColor="#222"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtFullName" />
+
+    <!-- Địa chỉ -->
+
+    <!-- Nút lưu -->
+
+    <ImageView
+        android:id="@+id/imgPhone"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/desc_icon_phone"
+        android:src="@drawable/ic_phone_24"
+        app:layout_constraintEnd_toEndOf="@+id/edtPhone"
+        app:layout_constraintHorizontal_bias="0.028"
+        app:layout_constraintStart_toStartOf="@+id/edtPhone"
+        app:layout_constraintTop_toTopOf="@+id/edtPhone"
+        app:tint="#1976D2" />
+
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="24dp"
+        android:autofillHints="postalAddress"
+        android:background="@drawable/edittext_background_blue"
+        android:hint="@string/hint_address"
+        android:inputType="textPostalAddress"
+        android:paddingStart="44dp"
+        android:paddingEnd="12dp"
+        android:textColor="#222"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtPhone" />
+
+    <ImageView
+        android:id="@+id/imgAddress"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="12dp"
+        android:contentDescription="@string/desc_icon_address"
+        android:src="@drawable/ic_home_24"
+        app:layout_constraintEnd_toEndOf="@+id/edtEmail"
+        app:layout_constraintHorizontal_bias="0.031"
+        app:layout_constraintStart_toStartOf="@+id/edtEmail"
+        app:layout_constraintTop_toTopOf="@+id/edtEmail"
+        app:tint="#1976D2" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/button_primary"
+        android:backgroundTint="#1976D2"
+        android:elevation="4dp"
+        android:text="@string/save_changes"
+        android:textAllCaps="false"
+        android:textColor="#FFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtEmail" />
+
+</androidx.constraintlayout.widget.ConstraintLayout> 
