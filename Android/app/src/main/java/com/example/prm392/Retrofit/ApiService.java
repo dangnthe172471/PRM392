@@ -9,8 +9,12 @@ import com.example.prm392.model.ForgotPasswordRequest;
 import com.example.prm392.model.VerifyPinRequest;
 import com.example.prm392.model.ResetPasswordRequest;
 import com.example.prm392.model.ApiResponse;
+import com.example.prm392.model.Job;
+import com.example.prm392.model.UpdateJobStatusRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -20,6 +24,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface ApiService {
     Gson gson = new GsonBuilder()
@@ -55,4 +60,24 @@ public interface ApiService {
 
     @POST("api/auth/reset-password")
     Call<ApiResponse> resetPassword(@Body ResetPasswordRequest request);
+
+    // Lấy danh sách việc có sẵn cho cleaner
+    @GET("api/Cleaner/available-jobs")
+    Call<List<Job>> getAvailableJobs();
+
+    // Lấy danh sách việc đã nhận của cleaner
+    @GET("api/Cleaner/my-jobs")
+    Call<List<Job>> getMyJobs(@Query("cleanerId") int cleanerId, @Query("status") String status);
+
+    // Nhận một việc mới
+    @POST("api/Cleaner/accept-job/{bookingId}")
+    Call<Void> acceptJob(@Path("bookingId") int bookingId, @Query("cleanerId") int cleanerId);
+
+    // Cập nhật trạng thái công việc
+    @PUT("api/Cleaner/update-job-status/{bookingId}")
+    Call<Void> updateJobStatus(@Path("bookingId") int bookingId, @Query("cleanerId") int cleanerId, @Body UpdateJobStatusRequest request);
+
+    // Lấy thông tin cá nhân cleaner
+    @GET("api/cleaner/profile")
+    Call<UserProfile> getCleanerProfile(@Query("cleanerId") int cleanerId);
 } 
