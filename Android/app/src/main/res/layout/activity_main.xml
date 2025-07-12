@@ -7,7 +7,7 @@
     android:background="#F9F9F9"
     tools:context=".MainActivity">
 
-    <!-- ScrollView chính -->
+
     <ScrollView
         android:id="@+id/mainScroll"
         android:layout_width="match_parent"
@@ -21,16 +21,14 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Greeting -->
-
-
+            <!-- Tiêu đề -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:text="Which service do you need?"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="4dp" />
 
             <!-- Search bar -->
             <EditText
@@ -91,52 +89,15 @@
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Filter section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Filter by:"
-                android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/filterContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <Spinner
-                    android:id="@+id/spinnerAreaSize"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/search_background"
-                    android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    android:spinnerMode="dropdown" />
-
-                <Space
-                    android:layout_width="8dp"
-                    android:layout_height="48dp" />
-
-                <Spinner
-                    android:id="@+id/spinnerTimeSlot"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/search_background"
-                    android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    android:spinnerMode="dropdown" />
-            </LinearLayout>
 
             <!-- Recommended Services -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:text="Recommended"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="20dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerServices"
@@ -147,7 +108,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation -->
+    <!-- Bottom Navigation được bọc trong CardView bo góc -->
     <androidx.cardview.widget.CardView
         android:id="@+id/bottomBarContainer"
         android:layout_width="match_parent"
@@ -169,4 +130,5 @@
             app:labelVisibilityMode="unlabeled"
             app:menu="@menu/bottom_nav_menu" />
     </androidx.cardview.widget.CardView>
+
 </RelativeLayout>
