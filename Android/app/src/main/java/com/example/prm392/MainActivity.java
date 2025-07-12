@@ -20,19 +20,18 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment selectedFragment = null;
                 int itemId = item.getItemId();
-
-                if (itemId == R.id.navigation_available_jobs) {
+                if (itemId == R.id.navigation_dashboard) {
+                    selectedFragment = new DashboardFragment();
+                } else if (itemId == R.id.navigation_available_jobs) {
                     selectedFragment = new AvailableJobsFragment();
                 } else if (itemId == R.id.navigation_my_jobs) {
                     selectedFragment = new MyJobsFragment();
                 } else if (itemId == R.id.navigation_profile) {
-                    // Mở ProfileActivity thay vì fragment
                     startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-                    return false; // Không thay fragment
+                    return false;
                 } else {
-                    selectedFragment = new AvailableJobsFragment(); // fallback
+                    selectedFragment = new DashboardFragment(); // fallback
                 }
-
                 if (selectedFragment != null) {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_container, selectedFragment)
@@ -40,9 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 return true;
             }
-
         });
-        // Mặc định mở tab 1
-        navView.setSelectedItemId(R.id.navigation_available_jobs);
+        // Mặc định mở tab Dashboard
+        navView.setSelectedItemId(R.id.navigation_dashboard);
     }
 } 

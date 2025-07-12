@@ -11,6 +11,7 @@ import com.example.prm392.model.ResetPasswordRequest;
 import com.example.prm392.model.ApiResponse;
 import com.example.prm392.model.Job;
 import com.example.prm392.model.UpdateJobStatusRequest;
+import com.example.prm392.model.CleanerDashboardStats;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -80,4 +81,8 @@ public interface ApiService {
     // Lấy thông tin cá nhân cleaner
     @GET("api/cleaner/profile")
     Call<UserProfile> getCleanerProfile(@Query("cleanerId") int cleanerId);
+
+    // Lấy dashboard stats cho cleaner
+    @GET("api/cleaner/dashboard-stats")
+    Call<CleanerDashboardStats> getCleanerDashboardStats(@Query("cleanerId") int cleanerId);
 } 
