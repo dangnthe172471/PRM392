@@ -50,6 +50,9 @@
         <activity
             android:name=".EditProfileActivity"
             android:exported="false" />
+        <activity
+            android:name=".CleanerActionsActivity"
+            android:exported="false" />
     </application>
 
 
