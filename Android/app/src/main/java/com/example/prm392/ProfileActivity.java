@@ -21,7 +21,7 @@ import java.util.Locale;
 public class ProfileActivity extends AppCompatActivity {
     private TextView tvName, tvRole, tvEmail, tvPhone, tvAddress, tvStatus, tvExperience, tvCreatedAt;
     private LinearLayout layoutExperience;
-    private Button btnEditProfile, btnLogout;
+    private Button btnEditProfile, btnBookingHistory, btnLogout;
     private ApiService apiService;
     private UserProfile currentProfile;
 
@@ -60,6 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvCreatedAt = findViewById(R.id.tvCreatedAt);
         layoutExperience = findViewById(R.id.layoutExperience);
         btnEditProfile = findViewById(R.id.btnEditProfile);
+        btnBookingHistory = findViewById(R.id.btnBookingHistory);
         btnLogout = findViewById(R.id.btnLogout);
     }
 
@@ -160,6 +161,14 @@ public class ProfileActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(ProfileActivity.this, "Chưa có thông tin người dùng", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnBookingHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, BookingHistoryActivity.class);
+                startActivity(intent);
             }
         });
 
