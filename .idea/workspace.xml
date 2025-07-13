@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43c26b60-b751-4211-a225-e42a8add1f7c" name="Changes" comment="" />
+    <list default="true" id="5f4548fc-089f-4669-af38-229f6c0ddfbe" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,10 +17,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
   "associatedIndex": 5
 }]]></component>
-  <component name="ProjectId" id="2zDTDiqvp77VGYTUnGO7o0tInKc" />
+  <component name="ProjectId" id="2zBTsbom15pIIdxRad4QDE74YnR" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -33,19 +32,19 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "khuong",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/H/Ky8/PRM392/PRM392"
+    "last_opened_file_path": "D:/FPT/SU25/PRM391/project/PRM392/Android"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="43c26b60-b751-4211-a225-e42a8add1f7c" name="Changes" comment="" />
-      <created>1751264526730</created>
+      <changelist id="5f4548fc-089f-4669-af38-229f6c0ddfbe" name="Changes" comment="" />
+      <created>1751203674736</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1751264526730</updated>
+      <updated>1751203674736</updated>
     </task>
     <servers />
   </component>
