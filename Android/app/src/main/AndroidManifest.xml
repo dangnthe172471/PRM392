@@ -50,6 +50,18 @@
         <activity
             android:name=".EditProfileActivity"
             android:exported="false" />
+            
+        <activity
+            android:name=".BookingHistoryActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".BookingDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".FeedbackActivity"
+            android:exported="false" />
     </application>
 
 

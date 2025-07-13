@@ -353,6 +353,16 @@
             android:layout_marginBottom="12dp"/>
 
         <Button
+            android:id="@+id/btnBookingHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lịch sử đặt lịch"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_primary"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
