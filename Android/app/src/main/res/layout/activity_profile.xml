@@ -343,6 +343,16 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <Button
+            android:id="@+id/btnActions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Actions"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_primary"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
             android:id="@+id/btnEditProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -21,6 +21,11 @@ import java.util.Locale;
 public class ProfileActivity extends AppCompatActivity {
     private TextView tvName, tvRole, tvEmail, tvPhone, tvAddress, tvStatus, tvExperience, tvCreatedAt;
     private LinearLayout layoutExperience;
+  
+    //hao
+    private Button btnActions, btnEditProfile, btnLogout;
+
+  
     private Button btnEditProfile, btnBookingHistory, btnLogout;
     private ApiService apiService;
     private UserProfile currentProfile;
@@ -59,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvExperience = findViewById(R.id.tvExperience);
         tvCreatedAt = findViewById(R.id.tvCreatedAt);
         layoutExperience = findViewById(R.id.layoutExperience);
+        btnActions = findViewById(R.id.btnActions);
         btnEditProfile = findViewById(R.id.btnEditProfile);
         btnBookingHistory = findViewById(R.id.btnBookingHistory);
         btnLogout = findViewById(R.id.btnLogout);
@@ -149,6 +155,14 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void setupClickListeners() {
+        btnActions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, CleanerActionsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
