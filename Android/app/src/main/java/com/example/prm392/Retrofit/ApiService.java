@@ -12,6 +12,9 @@ import com.example.prm392.model.ApiResponse;
 import com.example.prm392.model.Job;
 import com.example.prm392.model.UpdateJobStatusRequest;
 import com.example.prm392.model.CleanerDashboardStats;
+import com.example.prm392.model.BookingResponse;
+import com.example.prm392.model.ReviewResponse;
+import com.example.prm392.model.CreateReviewRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -29,7 +32,7 @@ import retrofit2.http.Path;
 
 public interface ApiService {
     Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd HH:mm:ss")
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
             .create();
 
     ApiService api = new Retrofit.Builder()
@@ -85,4 +88,20 @@ public interface ApiService {
     // Lấy dashboard stats cho cleaner
     @GET("api/cleaner/dashboard-stats")
     Call<CleanerDashboardStats> getCleanerDashboardStats(@Query("cleanerId") int cleanerId);
+
+    // Booking APIs
+    @GET("api/Bookings")
+    Call<List<BookingResponse>> getUserBookings(@Query("status") String status, @Query("userId") int userId);
+
+    @GET("api/Bookings/{id}")
+    Call<BookingResponse> getBookingById(@Path("id") int bookingId, @Query("userId") int userId);
+
+    @GET("api/Review/booking/{bookingId}")
+    Call<ReviewResponse> getReviewByBooking(@Path("bookingId") int bookingId);
+
+    @POST("api/Review")
+    Call<ReviewResponse> createReview(@Body CreateReviewRequest request, @Query("userId") int userId);
+
+    @PUT("api/Review/{bookingId}")
+    Call<ReviewResponse> updateReview(@Path("bookingId") int bookingId, @Body CreateReviewRequest request, @Query("userId") int userId);
 } 
