@@ -11,5 +11,8 @@ namespace Exe201_API.Services
         Task<bool> ChangePasswordAsync(ChangePasswordRequestDto request);
         Task<UserProfileResponseDto> GetUserProfileAsync(int userId);
         Task<UserProfileResponseDto> UpdateUserProfileAsync(int userId, UserProfileUpdateRequestDto request);
+        Task<bool> ForgotPasswordAsync(ForgotPasswordRequestDto request);
+        Task<bool> VerifyPinAsync(VerifyPinRequestDto request);
+        Task<bool> ResetPasswordAsync(ResetPasswordRequestDto request);
     }
 } 
