@@ -24,7 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
   
     //hao
     private Button btnActions, btnEditProfile, btnLogout;
-    private Button btnEditProfile, btnBookingHistory, btnLogout;
+    private Button  btnBookingHistory;
     private ApiService apiService;
     private UserProfile currentProfile;
 
