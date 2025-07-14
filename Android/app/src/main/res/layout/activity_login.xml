@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@drawable/gradient_background">
+    android:background="@drawable/gradient_background"
+    android:orientation="vertical">
 
     <!-- Status Bar Spacer -->
     <View
@@ -16,64 +16,66 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <!-- App Logo/Icon -->
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@android:drawable/ic_menu_myplaces"
             android:background="@drawable/logo_background"
+            android:contentDescription="App Logo"
             android:padding="24dp"
-            android:contentDescription="App Logo" />
+            android:src="@android:drawable/ic_menu_myplaces" />
 
         <!-- Welcome Text -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:text="Chào mừng trở lại!"
-            android:textSize="32sp"
-            android:textStyle="bold"
             android:textColor="@color/white"
-            android:layout_marginBottom="8dp" />
+            android:textSize="32sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Đăng nhập để tiếp tục sử dụng dịch vụ"
-            android:textSize="16sp"
-            android:textColor="@color/white"
             android:alpha="0.9"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="Đăng nhập để tiếp tục sử dụng dịch vụ"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
     <!-- Login Form Card -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="24dp"
-        app:cardElevation="8dp"
-        app:cardBackgroundColor="@color/white">
+        app:cardElevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="vertical"
             android:paddingStart="32dp"
-            android:paddingEnd="32dp"
-            android:gravity="center_vertical">
+            android:paddingEnd="32dp">
 
             <!-- Form Title -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:text="Đăng nhập"
                 android:textColor="@color/primary_blue_dark"
@@ -84,7 +86,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/input_background"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
@@ -113,19 +115,19 @@
             <!-- Password Input -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/input_background"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
 
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:layout_marginEnd="12dp"
                     android:src="@android:drawable/ic_lock_idle_lock"
-                    app:tint="@color/primary_blue"
-                    android:layout_marginEnd="12dp" />
+                    app:tint="@color/primary_blue" />
 
                 <EditText
                     android:id="@+id/edtPassword"
@@ -146,7 +148,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_gravity="end"
-                android:layout_marginBottom="10dp"
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
@@ -154,19 +155,19 @@
                 android:padding="8dp"
                 android:text="Quên mật khẩu?"
                 android:textColor="@color/primary_blue"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
 
             <!-- Login Button -->
             <Button
                 android:id="@+id/btnLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Đăng nhập"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textAllCaps="false"
                 android:background="@drawable/button_gradient"
-                android:textColor="@color/white" />
+                android:text="Đăng nhập"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <!-- Register Link -->
             <TextView
@@ -180,10 +181,9 @@
                 android:padding="12dp"
                 android:text="Chưa có tài khoản? Đăng ký ngay"
                 android:textColor="@color/primary_blue"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
 

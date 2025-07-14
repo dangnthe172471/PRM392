@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 import com.example.prm392.model.RegisterRequest;
 import com.example.prm392.model.LoginResponse;
 import com.example.prm392.Retrofit.ApiService;
@@ -18,7 +17,7 @@ import retrofit2.Response;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends BaseActivity {
     private EditText edtEmail, edtPassword, edtName, edtPhone, edtAddress;
     private Button btnRegister;
     private TextView tvLogin;
@@ -26,10 +25,12 @@ public class RegisterActivity extends AppCompatActivity {
     private Spinner spinnerRole;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+    protected int getLayoutResourceId() {
+        return R.layout.activity_register;
+    }
 
+    @Override
+    protected void initViews() {
         // Initialize views
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
@@ -47,7 +48,10 @@ public class RegisterActivity extends AppCompatActivity {
             new String[]{"Người dùng", "Người dọn vệ sinh"});
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerRole.setAdapter(adapter);
+    }
 
+    @Override
+    protected void setupListeners() {
         // Register button click
         btnRegister.setOnClickListener(v -> performRegister());
 
@@ -56,6 +60,11 @@ public class RegisterActivity extends AppCompatActivity {
             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             finish();
         });
+    }
+
+    @Override
+    protected int getDefaultSelectedTab() {
+        return R.id.nav_profile;
     }
 
     private void performRegister() {

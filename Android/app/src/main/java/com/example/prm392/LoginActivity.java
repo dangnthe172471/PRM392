@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 import com.example.prm392.model.LoginRequest;
 import com.example.prm392.model.LoginResponse;
 import com.example.prm392.Retrofit.ApiService;
@@ -17,17 +16,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     private EditText edtEmail, edtPassword;
     private Button btnLogin;
     private TextView tvRegister, tvForgotPassword;
     private ApiService apiService;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    protected int getLayoutResourceId() {
+        return R.layout.activity_login;
+    }
 
+    @Override
+    protected void initViews() {
         // Initialize views
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
@@ -36,7 +37,10 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
         apiService = ApiService.api;
+    }
 
+    @Override
+    protected void setupListeners() {
         // Login button click
         btnLogin.setOnClickListener(v -> performLogin());
 
@@ -49,6 +53,11 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
         });
+    }
+
+    @Override
+    protected int getDefaultSelectedTab() {
+        return R.id.nav_profile;
     }
 
     private void performLogin() {
