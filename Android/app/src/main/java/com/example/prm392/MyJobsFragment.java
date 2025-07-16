@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.widget.LinearLayout;
+import android.app.AlertDialog;
 
 import com.example.prm392.Retrofit.AccountManager;
 import com.example.prm392.Retrofit.ApiService;
@@ -75,29 +76,40 @@ public class MyJobsFragment extends Fragment implements JobAdapter.OnJobClickLis
     public void onJobClick(Job job) {
         int cleanerId = AccountManager.getUserId(requireContext());
         String nextStatus = null;
+        String confirmMessage = null;
         if ("confirmed".equalsIgnoreCase(job.getStatus())) {
             nextStatus = "in_progress";
+            confirmMessage = "Xác nhận bắt đầu làm việc?";
         } else if ("in_progress".equalsIgnoreCase(job.getStatus())) {
             nextStatus = "completed";
+            confirmMessage = "Xác nhận hoàn thành công việc?";
         } else {
             Toast.makeText(getContext(), "Không thể cập nhật trạng thái cho công việc này!", Toast.LENGTH_SHORT).show();
             return;
         }
-        UpdateJobStatusRequest request = new UpdateJobStatusRequest(nextStatus);
-        ApiService.api.updateJobStatus(job.getId(), cleanerId, request).enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    Toast.makeText(getContext(), "Cập nhật trạng thái thành công!", Toast.LENGTH_SHORT).show();
-                    loadJobs();
-                } else {
-                    Toast.makeText(getContext(), "Không thể cập nhật trạng thái!", Toast.LENGTH_SHORT).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(getContext(), "Lỗi kết nối khi cập nhật trạng thái!", Toast.LENGTH_SHORT).show();
-            }
-        });
+        final String finalNextStatus = nextStatus;
+        new AlertDialog.Builder(requireContext())
+                .setTitle("Xác nhận")
+                .setMessage(confirmMessage)
+                .setPositiveButton("Đồng ý", (dialog, which) -> {
+                    UpdateJobStatusRequest request = new UpdateJobStatusRequest(finalNextStatus);
+                    ApiService.api.updateJobStatus(job.getId(), cleanerId, request).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(getContext(), "Cập nhật trạng thái thành công!", Toast.LENGTH_SHORT).show();
+                                loadJobs();
+                            } else {
+                                Toast.makeText(getContext(), "Không thể cập nhật trạng thái!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Toast.makeText(getContext(), "Lỗi kết nối khi cập nhật trạng thái!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                })
+                .setNegativeButton("Hủy", (dialog, which) -> dialog.dismiss())
+                .show();
     }
 } 
