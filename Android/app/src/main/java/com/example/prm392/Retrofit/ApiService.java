@@ -15,6 +15,7 @@ import com.example.prm392.model.CleanerDashboardStats;
 import com.example.prm392.model.BookingResponse;
 import com.example.prm392.model.ReviewResponse;
 import com.example.prm392.model.CreateReviewRequest;
+import com.example.prm392.model.CreateBookingRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -95,6 +96,9 @@ public interface ApiService {
 
     @GET("api/Bookings/{id}")
     Call<BookingResponse> getBookingById(@Path("id") int bookingId, @Query("userId") int userId);
+
+    @POST("api/Bookings")
+    Call<BookingResponse> createBooking(@Body CreateBookingRequest request, @Query("userId") int userId);
 
     @GET("api/Review/booking/{bookingId}")
     Call<ReviewResponse> getReviewByBooking(@Path("bookingId") int bookingId);

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView android:text="Dịch vụ" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <Spinner android:id="@+id/spinner_service" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+            <TextView android:text="Diện tích" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <Spinner android:id="@+id/spinner_area_size" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+            <TextView android:text="Khung giờ" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <Spinner android:id="@+id/spinner_time_slot" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+            <TextView android:text="Ngày đặt" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <EditText android:id="@+id/et_booking_date" android:layout_width="match_parent" android:layout_height="wrap_content" android:focusable="false" android:hint="yyyy-MM-dd"/>
+
+            <TextView android:text="Quận/Huyện" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <EditText android:id="@+id/et_address_district" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+            <TextView android:text="Địa chỉ chi tiết" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <EditText android:id="@+id/et_address_detail" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+            <TextView android:text="Tên liên hệ" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <EditText android:id="@+id/et_contact_name" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+            <TextView android:text="Số điện thoại" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <EditText android:id="@+id/et_contact_phone" android:layout_width="match_parent" android:layout_height="wrap_content" android:inputType="phone"/>
+
+            <TextView android:text="Ghi chú" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <EditText android:id="@+id/et_notes" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+            <Button android:id="@+id/btn_create_booking" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Đặt lịch"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_nav_menu" />
+
+</LinearLayout> 
