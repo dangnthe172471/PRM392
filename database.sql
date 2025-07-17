@@ -197,6 +197,17 @@ INSERT INTO TimeSlots (TimeRange) VALUES
 (N'14:00 - 16:00'),
 (N'16:00 - 18:00');
 
+-- Admin
+INSERT INTO Users (Name, Email, Password, Phone, Address, Role, Status) VALUES
+(N'Admin', 'admin@gmail.com', '123456', '0111222333', N'789 Nguyễn Thị Minh Khai, Q.1, TP.HCM', 'admin', 'active');
+
+-- 4 Cleaners
+INSERT INTO Users (Name, Email, Password, Phone, Address, Role, Status)
+VALUES
+(N'Trần Trang', 'ntmtrang123@gmail.com', '123456', '0910000001', N'Thạch Hòa, Thạch Thất, Hà Nội', 'cleaner', 'active'),
+(N'Lê Tường Vy', 'letuongvy1806@gmail.com', '123456', '0910000002', N'Thạch Hòa, Thạch Thất, Hà Nội', 'cleaner', 'active'),
+(N'Nguyễn Hoàng Anh', 'nguyenhoanganh2n6@gmail.com', '123456', '0910000003', N'Thạch Hòa, Thạch Thất, Hà Nội', 'cleaner', 'active'),
+(N'Nguyễn Thu Trang', 'ntmtrang126@gmail.com', '123456', '0910000004', N'Thạch Hòa, Thạch Thất, Hà Nội', 'cleaner', 'active');
 
 -- 21 Users (role: user)
 INSERT INTO Users (Name, Email, Password, Phone, Address, Role, Status)
@@ -222,18 +233,6 @@ VALUES
 (N'Tân Đạt', 'tandat193@gmail.com', '123456', '0900000019', N'Thạch Hòa, Thạch Thất, Hà Nội', 'user', 'active'),
 (N'Nguyễn Hoàng Anh', 'nguyenhoanganh2n7@gmail.com', '123456', '0900000020', N'Thạch Hòa, Thạch Thất, Hà Nội', 'user', 'active'),
 (N'Nguyễn Trang', 'ntmtrang129@gmail.com', '123456', '0900000021', N'Thạch Hòa, Thạch Thất, Hà Nội', 'user', 'active');
-
--- 4 Cleaners
-INSERT INTO Users (Name, Email, Password, Phone, Address, Role, Status)
-VALUES
-(N'Trần Trang', 'ntmtrang123@gmail.com', '123456', '0910000001', N'Thạch Hòa, Thạch Thất, Hà Nội', 'cleaner', 'active'),
-(N'Lê Tường Vy', 'letuongvy1806@gmail.com', '123456', '0910000002', N'Thạch Hòa, Thạch Thất, Hà Nội', 'cleaner', 'active'),
-(N'Nguyễn Hoàng Anh', 'nguyenhoanganh2n6@gmail.com', '123456', '0910000003', N'Thạch Hòa, Thạch Thất, Hà Nội', 'cleaner', 'active'),
-(N'Nguyễn Thu Trang', 'ntmtrang126@gmail.com', '123456', '0910000004', N'Thạch Hòa, Thạch Thất, Hà Nội', 'cleaner', 'active');
-
--- Admin
-INSERT INTO Users (Name, Email, Password, Phone, Address, Role, Status) VALUES
-(N'Admin', 'admin@gmail.com', '123456', '0111222333', N'789 Nguyễn Thị Minh Khai, Q.1, TP.HCM', 'admin', 'active');
 
 -- NewsCategories
 INSERT INTO NewsCategories (Name, Slug, ColorClass) VALUES
