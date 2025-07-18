@@ -108,4 +108,14 @@ public interface ApiService {
 
     @PUT("api/Review/{bookingId}")
     Call<ReviewResponse> updateReview(@Path("bookingId") int bookingId, @Body CreateReviewRequest request, @Query("userId") int userId);
+
+    // Reference Data APIs
+    @GET("api/ReferenceData/services")
+    Call<List<com.example.prm392.model.ServiceModel>> getServices();
+
+    @GET("api/ReferenceData/areasizes")
+    Call<List<com.example.prm392.model.AreaSizeModel>> getAreaSizes();
+
+    @GET("api/ReferenceData/timeslots")
+    Call<List<com.example.prm392.model.TimeSlotModel>> getTimeSlots();
 } 
