@@ -78,10 +78,9 @@
             android:exported="false" />
 
         <activity android:name=".BookingActivity" />
-        <activity android:name=".MapPickerActivity" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAMTYQ3PMn-yP-XYyzLasod1fGnnhmfU_A" />
+            android:value="" />
     </application>
 
 
