@@ -33,6 +33,7 @@ import retrofit2.http.Path;
 import com.example.prm392.model.NewsArticle;
 import com.example.prm392.model.NewsListResponse;
 import com.example.prm392.model.CreateNewsArticleRequest;
+import retrofit2.http.DELETE;
 
 public interface ApiService {
     Gson gson = new GsonBuilder()
@@ -130,4 +131,10 @@ public interface ApiService {
 
     @POST("api/news")
     Call<NewsArticle> createArticle(@Body CreateNewsArticleRequest request);
+
+    @PUT("api/news/{id}")
+    Call<NewsArticle> updateArticle(@Path("id") int id, @Body CreateNewsArticleRequest request);
+
+    @DELETE("api/news/{id}")
+    Call<Void> deleteArticle(@Path("id") int id);
 } 

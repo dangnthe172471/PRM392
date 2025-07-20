@@ -72,6 +72,18 @@ public class NewsArticleAdapter extends RecyclerView.Adapter<NewsArticleAdapter.
         } else {
             holder.imgNews.setImageResource(R.drawable.sample_blog_image);
         }
+        // Ẩn nút edit/delete mặc định
+        holder.btnEdit.setVisibility(View.GONE);
+        holder.btnDelete.setVisibility(View.GONE);
+        holder.itemView.setOnLongClickListener(v -> {
+            holder.btnEdit.setVisibility(View.VISIBLE);
+            holder.btnDelete.setVisibility(View.VISIBLE);
+            return true;
+        });
+        holder.itemView.setOnClickListener(v -> {
+            holder.btnEdit.setVisibility(View.GONE);
+            holder.btnDelete.setVisibility(View.GONE);
+        });
         holder.btnEdit.setOnClickListener(v -> listener.onEdit(article));
         holder.btnDelete.setOnClickListener(v -> listener.onDelete(article));
     }

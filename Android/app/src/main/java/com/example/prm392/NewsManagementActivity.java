@@ -38,6 +38,7 @@ import android.view.WindowManager;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 import com.example.prm392.model.CreateNewsArticleRequest;
+import androidx.appcompat.app.AlertDialog;
 
 public class NewsManagementActivity extends AppCompatActivity {
     private NewsArticleAdapter adapter;
@@ -68,11 +69,32 @@ public class NewsManagementActivity extends AppCompatActivity {
         adapter = new NewsArticleAdapter(this, newsList, new NewsArticleAdapter.OnNewsActionListener() {
             @Override
             public void onEdit(NewsArticle article) {
-                Toast.makeText(NewsManagementActivity.this, "Sửa: " + article.getTitle(), Toast.LENGTH_SHORT).show();
+                showCreateNewsDialog(article);
             }
             @Override
             public void onDelete(NewsArticle article) {
-                Toast.makeText(NewsManagementActivity.this, "Xóa: " + article.getTitle(), Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(NewsManagementActivity.this)
+                    .setTitle("Xác nhận xóa")
+                    .setMessage("Bạn có chắc chắn muốn xóa bài viết này?")
+                    .setPositiveButton("Xóa", (dialog, which) -> {
+                        ApiService.api.deleteArticle(article.getId()).enqueue(new retrofit2.Callback<Void>() {
+                            @Override
+                            public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> response) {
+                                if (response.isSuccessful()) {
+                                    Toast.makeText(NewsManagementActivity.this, "Đã xóa bài viết!", Toast.LENGTH_SHORT).show();
+                                    loadNews();
+                                } else {
+                                    Toast.makeText(NewsManagementActivity.this, "Xóa thất bại!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            @Override
+                            public void onFailure(retrofit2.Call<Void> call, Throwable t) {
+                                Toast.makeText(NewsManagementActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    })
+                    .setNegativeButton("Hủy", null)
+                    .show();
             }
         });
         recyclerView.setAdapter(adapter);
@@ -108,6 +130,9 @@ public class NewsManagementActivity extends AppCompatActivity {
     }
 
     private void showCreateNewsDialog() {
+        showCreateNewsDialog(null);
+    }
+    private void showCreateNewsDialog(@Nullable NewsArticle editArticle) {
         createDialog = new Dialog(this);
         createDialog.setContentView(R.layout.dialog_create_news_article);
         createDialog.setCancelable(true);
@@ -123,8 +148,20 @@ public class NewsManagementActivity extends AppCompatActivity {
         ImageView imgPreview = createDialog.findViewById(R.id.imgPreview);
         Button btnSave = createDialog.findViewById(R.id.btnSave);
         Button btnCancel = createDialog.findViewById(R.id.btnCancel);
-        btnPickImage.setOnClickListener(v -> pickImageFromGallery());
-        btnCancel.setOnClickListener(v -> createDialog.dismiss());
+        // Nếu là sửa, set dữ liệu lên form
+        if (editArticle != null) {
+            edtTitle.setText(editArticle.getTitle());
+            edtExcerpt.setText(editArticle.getExcerpt());
+            edtContent.setText(editArticle.getExcerpt()); // hoặc getContent nếu có
+            // Load ảnh hiện có nếu có
+            if (editArticle.getImageUrl() != null && !editArticle.getImageUrl().isEmpty()) {
+                imgPreview.setVisibility(View.VISIBLE);
+                Glide.with(this).load(editArticle.getImageUrl()).into(imgPreview);
+            } else {
+                imgPreview.setVisibility(View.GONE);
+            }
+            // Category sẽ set sau khi load xong danh mục
+        }
         // Gọi API lấy danh mục
         ApiService.api.getCategories().enqueue(new retrofit2.Callback<List<com.example.prm392.model.NewsArticle.Category>>() {
             @Override
@@ -138,6 +175,15 @@ public class NewsManagementActivity extends AppCompatActivity {
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(NewsManagementActivity.this, android.R.layout.simple_spinner_item, categoryNames);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerCategory.setAdapter(adapter);
+                    // Nếu là sửa, set category đúng vị trí
+                    if (editArticle != null && editArticle.getCategory() != null) {
+                        for (int i = 0; i < categoryList.size(); i++) {
+                            if (categoryList.get(i).getId() == editArticle.getCategory().getId()) {
+                                spinnerCategory.setSelection(i);
+                                break;
+                            }
+                        }
+                    }
                 }
             }
             @Override
@@ -145,6 +191,8 @@ public class NewsManagementActivity extends AppCompatActivity {
                 Toast.makeText(NewsManagementActivity.this, "Không thể tải danh mục", Toast.LENGTH_SHORT).show();
             }
         });
+        btnPickImage.setOnClickListener(v -> pickImageFromGallery());
+        btnCancel.setOnClickListener(v -> createDialog.dismiss());
         btnSave.setOnClickListener(v -> {
             String title = edtTitle.getText().toString().trim();
             String excerpt = edtExcerpt.getText().toString().trim();
@@ -161,25 +209,46 @@ public class NewsManagementActivity extends AppCompatActivity {
             req.setExcerpt(excerpt);
             req.setContent(content);
             req.setCategoryId(selectedCategory.getId());
-            req.setImageUrl("");
-            ApiService.api.createArticle(req).enqueue(new retrofit2.Callback<NewsArticle>() {
-                @Override
-                public void onResponse(retrofit2.Call<NewsArticle> call, retrofit2.Response<NewsArticle> response) {
-                    btnSave.setEnabled(true);
-                    if (response.isSuccessful() && response.body() != null) {
-                        Toast.makeText(NewsManagementActivity.this, "Tạo bài viết thất bại!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        createDialog.dismiss();
-                        Toast.makeText(NewsManagementActivity.this, "Đã tạo bài viết mới!", Toast.LENGTH_SHORT).show();
-                        loadNews();
+            req.setImageUrl(""); // Nếu có upload ảnh, truyền link ảnh, tạm thời để rỗng
+            if (editArticle == null) {
+                ApiService.api.createArticle(req).enqueue(new retrofit2.Callback<NewsArticle>() {
+                    @Override
+                    public void onResponse(retrofit2.Call<NewsArticle> call, retrofit2.Response<NewsArticle> response) {
+                        btnSave.setEnabled(true);
+                        if (response.isSuccessful() && response.body() != null) {
+                            createDialog.dismiss();
+                            Toast.makeText(NewsManagementActivity.this, "Đã tạo bài viết mới!", Toast.LENGTH_SHORT).show();
+                            loadNews();
+                        } else {
+                            Toast.makeText(NewsManagementActivity.this, "Tạo bài viết thất bại!", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-                @Override
-                public void onFailure(retrofit2.Call<NewsArticle> call, Throwable t) {
-                    btnSave.setEnabled(true);
-                    Toast.makeText(NewsManagementActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                    @Override
+                    public void onFailure(retrofit2.Call<NewsArticle> call, Throwable t) {
+                        btnSave.setEnabled(true);
+                        Toast.makeText(NewsManagementActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                ApiService.api.updateArticle(editArticle.getId(), req).enqueue(new retrofit2.Callback<NewsArticle>() {
+                    @Override
+                    public void onResponse(retrofit2.Call<NewsArticle> call, retrofit2.Response<NewsArticle> response) {
+                        btnSave.setEnabled(true);
+                        if (response.isSuccessful() && response.body() != null) {
+                            createDialog.dismiss();
+                            Toast.makeText(NewsManagementActivity.this, "Đã cập nhật bài viết!", Toast.LENGTH_SHORT).show();
+                            loadNews();
+                        } else {
+                            Toast.makeText(NewsManagementActivity.this, "Cập nhật thất bại!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onFailure(retrofit2.Call<NewsArticle> call, Throwable t) {
+                        btnSave.setEnabled(true);
+                        Toast.makeText(NewsManagementActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         });
         if (selectedImageUri != null) {
             imgPreview.setVisibility(View.VISIBLE);
