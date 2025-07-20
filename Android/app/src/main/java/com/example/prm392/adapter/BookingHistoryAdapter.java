@@ -111,7 +111,7 @@ public class BookingHistoryAdapter extends RecyclerView.Adapter<BookingHistoryAd
             int colorRes;
             switch (status.toLowerCase()) {
                 case "pending":
-                    colorRes = R.color.status_pending;
+                    colorRes = R.color.status_default;
                     break;
                 case "confirmed":
                     colorRes = R.color.status_confirmed;
