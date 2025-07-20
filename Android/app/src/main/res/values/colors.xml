@@ -16,5 +16,5 @@
     <color name="status_in_progress">#9C27B0</color>
     <color name="status_completed">#4CAF50</color>
     <color name="status_cancelled">#F44336</color>
-    <color name="status_default">#757575</color>
+    <color name="status_default">#FFFFFFFF</color>
 </resources>

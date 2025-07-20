@@ -294,27 +294,31 @@ INSERT INTO NewsArticleTags (ArticleId, TagId) VALUES
 -- Bookings
 INSERT INTO Bookings (UserId, ServiceId, AreaSizeId, TimeSlotId, CleanerId, BookingDate, Address, ContactName, ContactPhone, Notes, TotalPrice, Status)
 VALUES
-(1, 1, 1, 1, 4, '2025-05-29', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Nguyễn Đức Tâm', '0900000001', NULL, 119000, 'completed'),
-(2, 1, 1, 1, 4, '2025-05-30', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Nam Khánh', '0900000002', NULL, 119000, 'completed'),
-(3, 1, 2, 1, 2, '2025-05-31', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Quý', '0900000003', NULL, 149000, 'completed'),
-(4, 1, 1, 1, 2, '2025-06-01', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Nguyễn Quang Vinh', '0900000004', NULL, 119000, 'completed'),
-(5, 1, 1, 1, 2, '2025-06-02', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Huỳnh Thái Khang', '0900000005', NULL, 119000, 'completed'),
-(6, 1, 1, 1, 2, '2025-06-03', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Đạt', '0900000006', NULL, 119000, 'completed'),
-(7, 1, 2, 1, 4, '2025-06-07', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Thanh D', '0900000007', NULL, 149000, 'completed'),
-(8, 1, 2, 1, 4, '2025-06-07', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Hinh Võ', '0900000008', NULL, 149000, 'completed'),
-(9, 1, 1, 1, 4, '2025-06-07', N'Thạch Hòa, Thạch Thất, Hà Nội', N'King PvP', '0900000009', NULL, 119000, 'completed'),
-(10, 1, 2, 1, 2, '2025-06-08', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Võ Nhật Duy', '0900000010', NULL, 149000, 'completed'),
-(11, 1, 2, 1, 2, '2025-06-08', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Tiến Nhiên', '0900000011', NULL, 149000, 'completed'),
-(12, 1, 1, 1, 4, '2025-06-09', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Ngô Khang', '0900000012', NULL, 119000, 'completed'),
-(13, 1, 2, 1, 2, '2025-06-10', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Văn Linh', '0900000013', NULL, 149000, 'completed'),
-(14, 1, 1, 1, 4, '2025-06-11', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Ngô Thảo Nguyên', '0900000014', NULL, 119000, 'completed'),
-(15, 1, 2, 1, 2, '2025-06-14', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Văn Ách', '0900000015', NULL, 149000, 'completed'),
-(16, 1, 2, 1, 3, '2025-06-14', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Thắng Nghiêm', '0900000016', NULL, 149000, 'completed'),
-(17, 1, 2, 1, 2, '2025-06-14', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Văn Zlinh', '0900000017', NULL, 149000, 'completed'),
-(18, 1, 1, 1, 2, '2025-06-15', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Holy Alone', '0900000018', NULL, 119000, 'completed'),
-(19, 1, 4, 1, 3, '2025-06-15', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Tân Đạt', '0900000019', NULL, 278000, 'completed'),
-(20, 1, 2, 1, 3, '2025-06-15', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Võ Vĩnh Phúc', '0900000020', NULL, 149000, 'completed'),
-(21, 1, 2, 1, 2, '2025-06-18', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Nhật Khiêm', '0900000021', NULL, 149000, 'completed');
+(6, 1, 1, 1, 4, '2025-05-29', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Nguyễn Đức Tâm', '0900000001', NULL, 119000, 'completed'),
+(7, 1, 1, 1, 4, '2025-05-30', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Nam Khánh', '0900000002', NULL, 119000, 'completed'),
+(8, 1, 2, 1, 2, '2025-05-31', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Quý', '0900000003', NULL, 149000, 'completed'),
+(9, 1, 1, 1, 2, '2025-06-01', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Nguyễn Quang Vinh', '0900000004', NULL, 119000, 'completed'),
+(10, 1, 1, 1, 2, '2025-06-02', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Huỳnh Thái Khang', '0900000005', NULL, 119000, 'completed'),
+(11, 1, 1, 1, 2, '2025-06-03', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Đạt', '0900000006', NULL, 119000, 'completed'),
+(12, 1, 2, 1, 4, '2025-06-07', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Thanh D', '0900000007', NULL, 149000, 'completed'),
+(13, 1, 2, 1, 4, '2025-06-07', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Hinh Võ', '0900000008', NULL, 149000, 'completed'),
+(14, 1, 1, 1, 4, '2025-06-07', N'Thạch Hòa, Thạch Thất, Hà Nội', N'King PvP', '0900000009', NULL, 119000, 'completed'),
+(15, 1, 2, 1, 2, '2025-06-08', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Võ Nhật Duy', '0900000010', NULL, 149000, 'completed'),
+(16, 1, 2, 1, 2, '2025-06-08', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Tiến Nhiên', '0900000011', NULL, 149000, 'completed'),
+(17, 1, 1, 1, 4, '2025-06-09', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Ngô Khang', '0900000012', NULL, 119000, 'completed'),
+(18, 1, 2, 1, 2, '2025-06-10', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Văn Linh', '0900000013', NULL, 149000, 'completed'),
+(19, 1, 1, 1, 4, '2025-06-11', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Ngô Thảo Nguyên', '0900000014', NULL, 119000, 'completed'),
+(20, 1, 2, 1, 2, '2025-06-14', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Văn Ách', '0900000015', NULL, 149000, 'completed'),
+(21, 1, 2, 1, 3, '2025-06-14', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Thắng Nghiêm', '0900000016', NULL, 149000, 'completed'),
+(22, 1, 2, 1, 2, '2025-06-14', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Văn Zlinh', '0900000017', NULL, 149000, 'completed'),
+(23, 1, 1, 1, 2, '2025-06-15', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Holy Alone', '0900000018', NULL, 119000, 'completed'),
+(24, 1, 4, 1, 3, '2025-06-15', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Tân Đạt', '0900000019', NULL, 278000, 'completed'),
+(25, 1, 2, 1, 3, '2025-06-15', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Võ Vĩnh Phúc', '0900000020', NULL, 149000, 'completed'),
+(26, 1, 2, 1, 2, '2025-06-18', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Nhật Khiêm', '0900000021', NULL, 149000, 'completed');
+
+INSERT INTO Bookings (UserId, ServiceId, AreaSizeId, TimeSlotId, CleanerId, BookingDate, Address, ContactName, ContactPhone, Notes, TotalPrice, Status)
+VALUES
+(10, 1, 1, 1, 2, '2025-06-020', N'Thạch Hòa, Thạch Thất, Hà Nội', N'Huỳnh Thái Khang', '0900000005', NULL, 119000, 'pending');
 
 -- Indexes để tối ưu performance
 CREATE INDEX IX_Bookings_UserId ON Bookings(UserId);

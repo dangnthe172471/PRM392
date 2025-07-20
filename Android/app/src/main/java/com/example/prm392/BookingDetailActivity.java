@@ -272,7 +272,7 @@ public class BookingDetailActivity extends AppCompatActivity {
         int colorRes;
         switch (status.toLowerCase()) {
             case "pending":
-                colorRes = R.color.status_pending;
+                colorRes = R.color.status_default;
                 break;
             case "confirmed":
                 colorRes = R.color.status_confirmed;
