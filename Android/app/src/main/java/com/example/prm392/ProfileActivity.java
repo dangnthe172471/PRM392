@@ -209,8 +209,8 @@ public class ProfileActivity extends AppCompatActivity {
             Intent intent = new Intent(ProfileActivity.this, BookingHistoryActivity.class);
             startActivity(intent);
         } else if ("admin".equals(role)) {
-            // TODO: Implement admin functionality
-            Toast.makeText(this, "Chức năng quản lý đang được phát triển", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, AdminDashboardActivity.class);
+            startActivity(intent);
         } else {
             Toast.makeText(this, "Vai trò không hợp lệ", Toast.LENGTH_SHORT).show();
         }

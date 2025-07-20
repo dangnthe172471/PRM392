@@ -30,6 +30,9 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import com.example.prm392.model.NewsArticle;
+import com.example.prm392.model.NewsListResponse;
+import com.example.prm392.model.CreateNewsArticleRequest;
 
 public interface ApiService {
     Gson gson = new GsonBuilder()
@@ -118,4 +121,13 @@ public interface ApiService {
 
     @GET("api/ReferenceData/timeslots")
     Call<List<com.example.prm392.model.TimeSlotModel>> getTimeSlots();
+
+    @GET("api/news")
+    Call<NewsListResponse> getNewsArticles(@Query("page") int page, @Query("pageSize") int pageSize);
+
+    @GET("api/news/categories")
+    Call<List<NewsArticle.Category>> getCategories();
+
+    @POST("api/news")
+    Call<NewsArticle> createArticle(@Body CreateNewsArticleRequest request);
 } 

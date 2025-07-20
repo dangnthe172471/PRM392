@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F6FA">
+
+    <ScrollView
+        android:id="@+id/adminScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNavigation"
+        android:layout_alignParentTop="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginTop="32dp">
+
+            <TextView
+                android:id="@+id/tv_dashboard_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Admin Dashboard"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#222"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="16dp"/>
+
+            <Button
+                android:id="@+id/btn_manage_news"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Quản lý bài viết"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:backgroundTint="@color/purple_500"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Tổng quan -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <TextView android:text="Khách hàng" android:textColor="#888" android:textSize="14sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:id="@+id/tv_total_customers" android:text="0" android:textSize="20sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <TextView android:text="Cleaner" android:textColor="#888" android:textSize="14sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:id="@+id/tv_total_cleaners" android:text="0" android:textSize="20sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <TextView android:text="Hóa đơn" android:textColor="#888" android:textSize="14sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:id="@+id/tv_total_bills" android:text="0" android:textSize="20sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Booking tổng & doanh thu tổng mỗi cái 1 card riêng -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView android:text="Tổng số Booking" android:textStyle="bold" android:textSize="16sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    <TextView android:id="@+id/tv_total_bookings" android:text="0" android:textSize="20sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingTop="8dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView android:text="Tổng doanh thu" android:textStyle="bold" android:textSize="16sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    <TextView android:id="@+id/tv_total_revenue" android:text="0 đ" android:textSize="20sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingTop="8dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Bookings by status -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView android:text="Trạng thái Booking" android:textStyle="bold" android:textSize="16sp" android:paddingBottom="8dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <TextView android:text="Chờ xử lý: " android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:id="@+id/tv_pending" android:text="0" android:textStyle="bold" android:paddingEnd="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:text="Đã xác nhận: " android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:id="@+id/tv_confirmed" android:text="0" android:textStyle="bold" android:paddingEnd="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:text="Đang làm: " android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:id="@+id/tv_in_progress" android:text="0" android:textStyle="bold" android:paddingEnd="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="4dp">
+                        <TextView android:text="Hoàn thành: " android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:id="@+id/tv_completed" android:text="0" android:textStyle="bold" android:paddingEnd="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:text="Đã huỷ: " android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:id="@+id/tv_cancelled" android:text="0" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Revenue by service -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView android:text="Doanh thu theo dịch vụ" android:textStyle="bold" android:textSize="16sp" android:paddingBottom="8dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="Dọn Nhà Định Kỳ: " android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tv_revenue_dndk" android:text="0 đ" android:textStyle="bold" android:paddingEnd="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="Dọn Nhà Và Chuyển Phòng: " android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tv_revenue_dncp" android:text="0 đ" android:textStyle="bold" android:paddingEnd="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+                            <TextView android:text="Dọn Phòng Sau Xây Dựng: " android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                            <TextView android:id="@+id/tv_revenue_dpsxd" android:text="0 đ" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Cleaners -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:text="Cleaner chờ duyệt" android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:id="@+id/tv_pending_cleaners" android:text="0" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:text="Cleaner đang hoạt động" android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:id="@+id/tv_active_cleaners" android:text="0" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Recent bookings/revenue -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="12dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <TextView android:text="Gần đây" android:textStyle="bold" android:textSize="16sp" android:paddingBottom="8dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content">
+                        <TextView android:text="Booking mới: " android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:id="@+id/tv_recent_bookings" android:text="0" android:textStyle="bold" android:paddingEnd="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:text="Doanh thu mới: " android:textColor="#888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:id="@+id/tv_recent_revenue" android:text="0 đ" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottom_nav_background"
+        app:itemIconTint="@color/selector_nav_icon"
+        app:itemTextColor="@color/selector_nav_icon"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/bottom_nav_menu" />
+
+</RelativeLayout> 

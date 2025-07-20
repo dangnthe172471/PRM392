@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp"
+    app:cardElevation="6dp"
+    app:cardCornerRadius="16dp"
+    app:cardBackgroundColor="#fff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp">
+
+        <ImageView
+            android:id="@+id/imgNews"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/sample_blog_image"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/rounded_background"
+            android:contentDescription="Ảnh bài viết"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/imgNews"
+            android:layout_marginStart="14dp"
+            android:text="Tiêu đề bài viết"
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="#222"/>
+
+        <TextView
+            android:id="@+id/tvExcerpt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTitle"
+            android:layout_toEndOf="@id/imgNews"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="4dp"
+            android:text="Mô tả ngắn bài viết..."
+            android:textColor="#666"
+            android:textSize="13sp"
+            android:maxLines="2"
+            android:ellipsize="end"/>
+
+        <TextView
+            android:id="@+id/tvCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvExcerpt"
+            android:layout_toEndOf="@id/imgNews"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="6dp"
+            android:text="Danh mục"
+            android:textColor="#4FC3F7"
+            android:textStyle="bold"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/tvMeta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvCategory"
+            android:layout_toEndOf="@id/imgNews"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="4dp"
+            android:text="12/05/2024 • Admin"
+            android:textColor="#888"
+            android:textSize="12sp"/>
+
+        <ImageButton
+            android:id="@+id/btnEdit"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:background="@android:color/transparent"
+            android:src="@android:drawable/ic_menu_edit"
+            android:contentDescription="Sửa"/>
+
+        <ImageButton
+            android:id="@+id/btnDelete"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_below="@id/btnEdit"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:background="@android:color/transparent"
+            android:src="@android:drawable/ic_menu_delete"
+            android:contentDescription="Xóa"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView> 
