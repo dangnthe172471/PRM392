@@ -123,9 +123,7 @@ public class BlogDetailActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Hiển thị nội dung - sử dụng TextView cũ hoặc layout tùy chỉnh
-     */
+
     private void displayContent(String content) {
         // Debug: In ra nội dung để kiểm tra
         System.out.println("DEBUG - Content: " + content);
