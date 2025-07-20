@@ -2,10 +2,13 @@ package com.example.prm392;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.prm392.Retrofit.ApiService;
 import com.example.prm392.model.ApiResponse;
@@ -23,6 +26,14 @@ public class VerifyPinActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_pin);
+
+        // Setup toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Xác thực PIN");
+        }
 
         edtPin = findViewById(R.id.edtPin);
         btnVerifyPin = findViewById(R.id.btnVerifyPin);
@@ -54,5 +65,14 @@ public class VerifyPinActivity extends AppCompatActivity {
                     }
                 });
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 } 

@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="#F5F5F5">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:title="Hồ sơ cá nhân"
+        app:titleTextColor="@color/white"
+        app:navigationIcon="@android:drawable/ic_menu_close_clear_cancel" />
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buttonContainer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_weight="1"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -41,7 +50,7 @@
                         android:id="@+id/imgAvatar"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/ic_launcher_foreground"
+                        android:src="@android:drawable/ic_menu_myplaces"
                         android:background="@drawable/circle_background"
                         android:padding="16dp"
                         android:layout_marginBottom="16dp"/>
@@ -106,9 +115,9 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_launcher_foreground"
-                            android:layout_marginEnd="12dp"
-                            android:alpha="0.6"/>
+                            android:src="@android:drawable/ic_dialog_email"
+                            app:tint="@color/primary_blue"
+                            android:layout_marginEnd="12dp"/>
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -144,9 +153,9 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_launcher_foreground"
-                            android:layout_marginEnd="12dp"
-                            android:alpha="0.6"/>
+                            android:src="@android:drawable/ic_menu_call"
+                            app:tint="@color/primary_blue"
+                            android:layout_marginEnd="12dp"/>
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -182,9 +191,9 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_launcher_foreground"
-                            android:layout_marginEnd="12dp"
-                            android:alpha="0.6"/>
+                            android:src="@android:drawable/ic_menu_compass"
+                            app:tint="@color/primary_blue"
+                            android:layout_marginEnd="12dp"/>
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -220,9 +229,9 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_launcher_foreground"
-                            android:layout_marginEnd="12dp"
-                            android:alpha="0.6"/>
+                            android:src="@android:drawable/ic_menu_info_details"
+                            app:tint="@color/primary_blue"
+                            android:layout_marginEnd="12dp"/>
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -260,9 +269,9 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_launcher_foreground"
-                            android:layout_marginEnd="12dp"
-                            android:alpha="0.6"/>
+                            android:src="@android:drawable/ic_menu_myplaces"
+                            app:tint="@color/primary_blue"
+                            android:layout_marginEnd="12dp"/>
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -297,9 +306,9 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_launcher_foreground"
-                            android:layout_marginEnd="12dp"
-                            android:alpha="0.6"/>
+                            android:src="@android:drawable/ic_menu_today"
+                            app:tint="@color/primary_blue"
+                            android:layout_marginEnd="12dp"/>
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -333,34 +342,41 @@
     <!-- Buttons Container -->
     <LinearLayout
         android:id="@+id/buttonContainer"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center"
         android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:background="@color/white">
 
         <Button
             android:id="@+id/btnEditProfile"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:text="Chỉnh sửa thông tin"
+            android:textSize="14sp"
             android:textColor="#FFFFFF"
             android:background="@drawable/button_primary"
-            android:padding="16dp"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnActions"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Hành động"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_primary"
+            android:layout_marginBottom="8dp"/>
 
         <Button
             android:id="@+id/btnLogout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:text="Đăng xuất"
+            android:textSize="14sp"
             android:textColor="#FF4444"
-            android:background="@drawable/button_secondary"
-            android:padding="16dp"/>
+            android:background="@drawable/button_secondary"/>
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout> 
+</LinearLayout> 

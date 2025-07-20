@@ -1,121 +1,36 @@
 package com.example.prm392.model;
 
-import com.google.gson.annotations.SerializedName;
-
 public class UserProfile {
-    @SerializedName("id")
-    private int id;
-
-    @SerializedName("name")
-    private String name;
-
-    @SerializedName("email")
+    private String name; // Thêm trường name
+    private String fullName;
     private String email;
-
-    @SerializedName("phone")
     private String phone;
-
-    @SerializedName("address")
     private String address;
-
-    @SerializedName("role")
-    private String role;
-
-    @SerializedName("status")
-    private String status;
-
-    @SerializedName("experience")
     private String experience;
+    private String status;
+    private String role; // Thêm trường role
+    private String createdAt; // Thêm trường createdAt
 
-    @SerializedName("createdAt")
-    private String createdAt;
-
-    // Constructors
-    public UserProfile() {
-    }
-
-    public UserProfile(int id, String name, String email, String phone, String address, String role, String status, String experience, String createdAt) {
-        this.id = id;
+    public UserProfile(String name, String fullName, String email, String phone, String address, String experience, String status, String role, String createdAt) {
         this.name = name;
+        this.fullName = fullName;
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.role = role;
-        this.status = status;
         this.experience = experience;
+        this.status = status;
+        this.role = role;
         this.createdAt = createdAt;
     }
 
-    // Getters and Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getExperience() {
-        return experience;
-    }
-
-    public void setExperience(String experience) {
-        this.experience = experience;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
+    // Getter cho name (ưu tiên name, fallback sang fullName)
+    public String getName() { return name != null ? name : fullName; }
+    public String getFullName() { return fullName != null ? fullName : name; }
+    public String getEmail() { return email; }
+    public String getPhone() { return phone; }
+    public String getAddress() { return address; }
+    public String getExperience() { return experience; }
+    public String getStatus() { return status; }
+    public String getRole() { return role; }
+    public String getCreatedAt() { return createdAt; }
 } 

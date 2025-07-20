@@ -9,8 +9,17 @@ import com.example.prm392.model.ForgotPasswordRequest;
 import com.example.prm392.model.VerifyPinRequest;
 import com.example.prm392.model.ResetPasswordRequest;
 import com.example.prm392.model.ApiResponse;
+import com.example.prm392.model.Job;
+import com.example.prm392.model.UpdateJobStatusRequest;
+import com.example.prm392.model.CleanerDashboardStats;
+import com.example.prm392.model.BookingResponse;
+import com.example.prm392.model.ReviewResponse;
+import com.example.prm392.model.CreateReviewRequest;
+import com.example.prm392.model.CreateBookingRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -20,10 +29,11 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface ApiService {
     Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd HH:mm:ss")
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
             .create();
 
     ApiService api = new Retrofit.Builder()
@@ -55,4 +65,57 @@ public interface ApiService {
 
     @POST("api/auth/reset-password")
     Call<ApiResponse> resetPassword(@Body ResetPasswordRequest request);
+
+    // Lấy danh sách việc có sẵn cho cleaner
+    @GET("api/Cleaner/available-jobs")
+    Call<List<Job>> getAvailableJobs();
+
+    // Lấy danh sách việc đã nhận của cleaner
+    @GET("api/Cleaner/my-jobs")
+    Call<List<Job>> getMyJobs(@Query("cleanerId") int cleanerId, @Query("status") String status);
+
+    // Nhận một việc mới
+    @POST("api/Cleaner/accept-job/{bookingId}")
+    Call<Void> acceptJob(@Path("bookingId") int bookingId, @Query("cleanerId") int cleanerId);
+
+    // Cập nhật trạng thái công việc
+    @PUT("api/Cleaner/update-job-status/{bookingId}")
+    Call<Void> updateJobStatus(@Path("bookingId") int bookingId, @Query("cleanerId") int cleanerId, @Body UpdateJobStatusRequest request);
+
+    // Lấy thông tin cá nhân cleaner
+    @GET("api/cleaner/profile")
+    Call<UserProfile> getCleanerProfile(@Query("cleanerId") int cleanerId);
+
+    // Lấy dashboard stats cho cleaner
+    @GET("api/cleaner/dashboard-stats")
+    Call<CleanerDashboardStats> getCleanerDashboardStats(@Query("cleanerId") int cleanerId);
+
+    // Booking APIs
+    @GET("api/Bookings")
+    Call<List<BookingResponse>> getUserBookings(@Query("status") String status, @Query("userId") int userId);
+
+    @GET("api/Bookings/{id}")
+    Call<BookingResponse> getBookingById(@Path("id") int bookingId, @Query("userId") int userId);
+
+    @POST("api/Bookings")
+    Call<BookingResponse> createBooking(@Body CreateBookingRequest request, @Query("userId") int userId);
+
+    @GET("api/Review/booking/{bookingId}")
+    Call<ReviewResponse> getReviewByBooking(@Path("bookingId") int bookingId);
+
+    @POST("api/Review")
+    Call<ReviewResponse> createReview(@Body CreateReviewRequest request, @Query("userId") int userId);
+
+    @PUT("api/Review/{bookingId}")
+    Call<ReviewResponse> updateReview(@Path("bookingId") int bookingId, @Body CreateReviewRequest request, @Query("userId") int userId);
+
+    // Reference Data APIs
+    @GET("api/ReferenceData/services")
+    Call<List<com.example.prm392.model.ServiceModel>> getServices();
+
+    @GET("api/ReferenceData/areasizes")
+    Call<List<com.example.prm392.model.AreaSizeModel>> getAreaSizes();
+
+    @GET("api/ReferenceData/timeslots")
+    Call<List<com.example.prm392.model.TimeSlotModel>> getTimeSlots();
 } 
