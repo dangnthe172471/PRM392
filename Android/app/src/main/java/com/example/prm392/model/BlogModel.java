@@ -1,6 +1,8 @@
 package com.example.prm392.model;
 
-public class BlogModel {
+import java.io.Serializable;
+
+public class BlogModel implements Serializable {
     private int id;
     private String title;
     private String content;

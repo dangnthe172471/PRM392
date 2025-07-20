@@ -66,14 +66,14 @@ public class MainActivity extends BaseActivity {
 
     private void loadServiceData() {
         fullServiceList = ServiceRepository.getAllServices();
-        serviceAdapter = new ServiceAdapter(this, fullServiceList);
+        serviceAdapter = new ServiceAdapter(this, new ArrayList<>(fullServiceList));
         recyclerServices.setAdapter(serviceAdapter);
     }
 
     private void searchServicesByName(String query) {
-        if (query.isEmpty()) {
+        if (query == null || query.trim().isEmpty()) {
             // Nếu search query rỗng, hiển thị tất cả services
-            serviceAdapter.updateData(fullServiceList);
+            serviceAdapter.updateData(new ArrayList<>(fullServiceList));
         } else {
             // Tìm kiếm từ database
             List<ServiceModel> searchResults = ServiceRepository.searchServicesByName(query);
