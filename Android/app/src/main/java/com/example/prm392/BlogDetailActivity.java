@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.example.prm392.database.BlogRepository;
 import com.example.prm392.model.BlogModel;
 import com.example.prm392.utils.HtmlContentHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -29,6 +30,7 @@ public class BlogDetailActivity extends AppCompatActivity {
     private LinearLayout llHtmlContent;
     private Toolbar toolbar;
     private BottomNavigationView bottomNavigation;
+    private BlogModel currentBlog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,14 +92,17 @@ public class BlogDetailActivity extends AppCompatActivity {
 
         // Lấy dữ liệu từ Intent
         Intent intent = getIntent();
-        BlogModel blog = (BlogModel) intent.getSerializableExtra("BlogData");
+        currentBlog = (BlogModel) intent.getSerializableExtra("BlogData");
 
         // Hiển thị dữ liệu lên UI
-        if (blog != null) {
-            tvTitle.setText(blog.getTitle());
+        if (currentBlog != null) {
+            // Tăng lượt xem khi mở bài blog
+            increaseBlogViews(currentBlog.getId());
+            
+            tvTitle.setText(currentBlog.getTitle());
             
             // Xử lý HTML content
-            String htmlContent = blog.getContent();
+            String htmlContent = currentBlog.getContent();
             if (htmlContent != null && !htmlContent.isEmpty()) {
                 // Luôn hiển thị nội dung, dù có HTML tags hay không
                 displayContent(htmlContent);
@@ -108,15 +113,15 @@ public class BlogDetailActivity extends AppCompatActivity {
                 tvContent.setText("No content available");
             }
             
-            tvDate.setText(blog.getPublishDate());
-            tvReadTime.setText(blog.getReadTime());
-            tvViews.setText(String.valueOf(blog.getViews()));
-            tvLikes.setText(String.valueOf(blog.getLikes()));
-            tvComments.setText(String.valueOf(blog.getComments()));
+            tvDate.setText(currentBlog.getPublishDate());
+            tvReadTime.setText(currentBlog.getReadTime());
+            tvViews.setText(String.valueOf(currentBlog.getViews()));
+            tvLikes.setText(String.valueOf(currentBlog.getLikes()));
+            tvComments.setText(String.valueOf(currentBlog.getComments()));
 
             // Load ảnh bằng Glide
             Glide.with(this)
-                    .load(blog.getImageUrl())
+                    .load(currentBlog.getImageUrl())
                     .placeholder(R.drawable.sample_blog_image)
                     .error(R.drawable.sample_blog_image)
                     .into(imgBlogDetail);
@@ -124,8 +129,22 @@ public class BlogDetailActivity extends AppCompatActivity {
     }
 
     /**
-     * Hiển thị nội dung - sử dụng TextView cũ hoặc layout tùy chỉnh
+     * Tăng lượt xem của blog và cập nhật UI
      */
+    private void increaseBlogViews(int blogId) {
+        // Tăng lượt xem trong database
+        boolean success = BlogRepository.updateBlogViews(blogId);
+        
+        if (success) {
+            // Tăng lượt xem trong model hiện tại
+            currentBlog.setViews(currentBlog.getViews() + 1);
+            
+            // Cập nhật UI
+            tvViews.setText(String.valueOf(currentBlog.getViews()));
+        }
+    }
+
+
     private void displayContent(String content) {
         // Debug: In ra nội dung để kiểm tra
         System.out.println("DEBUG - Content: " + content);
@@ -140,7 +159,7 @@ public class BlogDetailActivity extends AppCompatActivity {
             llHtmlContent.setVisibility(View.VISIBLE);
             displayHtmlContent(content);
         } else {
-            // Sử dụng TextView cũ cho text thường
+
             tvContent.setVisibility(View.VISIBLE);
             llHtmlContent.setVisibility(View.GONE);
             tvContent.setText(content);

@@ -76,4 +76,19 @@ public class BlogActivity extends BaseActivity {
         List<BlogModel> filtered = BlogRepository.searchBlogsByTitle(query);
         blogAdapter.updateData(filtered);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Refresh dữ liệu khi quay lại để cập nhật lượt xem
+        refreshData();
+    }
+
+    private void refreshData() {
+        // Reload dữ liệu từ database
+        fullBlogList = BlogRepository.getAllBlogs();
+        if (blogAdapter != null) {
+            blogAdapter.updateData(fullBlogList);
+        }
+    }
 }

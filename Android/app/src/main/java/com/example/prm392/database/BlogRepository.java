@@ -77,4 +77,28 @@ public class BlogRepository {
         }
         return blogs;
     }
+
+    public static boolean updateBlogViews(int blogId) {
+        Connection conn = DBHelper.getConnection();
+        if (conn != null) {
+            try {
+                Statement stmt = conn.createStatement();
+                String query = "UPDATE NewsArticles SET Views = Views + 1 WHERE Id = " + blogId;
+                int rowsAffected = stmt.executeUpdate(query);
+                conn.close();
+                
+                if (rowsAffected > 0) {
+                    Log.d("BLOG_DB", "Successfully updated views for blog ID: " + blogId);
+                    return true;
+                } else {
+                    Log.w("BLOG_DB", "No rows affected when updating views for blog ID: " + blogId);
+                    return false;
+                }
+            } catch (Exception e) {
+                Log.e("BLOG_DB", "Error updating blog views: " + e.getMessage());
+                return false;
+            }
+        }
+        return false;
+    }
 }
