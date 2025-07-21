@@ -13,7 +13,6 @@ public class AdminDashboardActivity extends BaseActivity {
 
     @Override
     protected void initViews() {
-        // Mock data
         int totalCustomers = 21;
         int totalCleaners = 4;
         int totalBookings = 27;

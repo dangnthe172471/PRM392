@@ -88,7 +88,7 @@ public class BookingActivity extends BaseActivity {
                 etBookingDate.setText(date);
                 filterTimeSlotsByDate(date);
             }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-            dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000); // Không cho chọn ngày quá khứ
+            dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
             dialog.show();
         });
 
@@ -107,7 +107,6 @@ public class BookingActivity extends BaseActivity {
                 Toast.makeText(this, "Vui lòng chọn khung giờ!", Toast.LENGTH_SHORT).show();
                 return;
             }
-            // Validate ngày + slot không được là quá khứ
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
                 Date selectedDate = sdf.parse(bookingDate);
@@ -183,7 +182,6 @@ public class BookingActivity extends BaseActivity {
             });
         });
         autofillContactInfo();
-        // Cập nhật giá khi chọn service hoặc area size
         spinnerService.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -200,15 +198,12 @@ public class BookingActivity extends BaseActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
-        // Hiển thị giá ban đầu
         updateTotalPrice();
-        // Set ngày đặt mặc định là hôm nay
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         etBookingDate.setText(sdf.format(new Date()));
     }
 
     private void loadReferenceData() {
-        // Load services
         ApiService.api.getServices().enqueue(new retrofit2.Callback<List<ServiceModel>>() {
             @Override
             public void onResponse(Call<List<ServiceModel>> call, Response<List<ServiceModel>> response) {
@@ -228,7 +223,6 @@ public class BookingActivity extends BaseActivity {
                 Toast.makeText(BookingActivity.this, "Lỗi tải dịch vụ!", Toast.LENGTH_SHORT).show();
             }
         });
-        // Load area sizes
         ApiService.api.getAreaSizes().enqueue(new retrofit2.Callback<List<AreaSizeModel>>() {
             @Override
             public void onResponse(Call<List<AreaSizeModel>> call, Response<List<AreaSizeModel>> response) {
@@ -253,7 +247,6 @@ public class BookingActivity extends BaseActivity {
             public void onResponse(Call<List<TimeSlotModel>> call, Response<List<TimeSlotModel>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     timeSlotList = response.body();
-                    // Lấy ngày hiện tại nếu có
                     String date = etBookingDate.getText().toString();
                     if (date.isEmpty()) {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -282,7 +275,6 @@ public class BookingActivity extends BaseActivity {
             }
             @Override
             public void onFailure(Call<UserProfile> call, Throwable t) {
-                // Không làm gì, giữ trống nếu lỗi
             }
         });
     }
@@ -337,7 +329,6 @@ public class BookingActivity extends BaseActivity {
         } catch (Exception e) {
             filteredTimeSlotList.addAll(timeSlotList);
         }
-        // Cập nhật adapter
         String[] slotNames = new String[filteredTimeSlotList.size()];
         timeSlotIds = new int[filteredTimeSlotList.size()];
         for (int i = 0; i < filteredTimeSlotList.size(); i++) {
@@ -366,6 +357,5 @@ public class BookingActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // Xoá biến mapPickerFragment, REQUEST_PICK_MAP
     }
 } 

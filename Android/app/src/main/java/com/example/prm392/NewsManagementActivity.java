@@ -148,21 +148,17 @@ public class NewsManagementActivity extends AppCompatActivity {
         ImageView imgPreview = createDialog.findViewById(R.id.imgPreview);
         Button btnSave = createDialog.findViewById(R.id.btnSave);
         Button btnCancel = createDialog.findViewById(R.id.btnCancel);
-        // Nếu là sửa, set dữ liệu lên form
         if (editArticle != null) {
             edtTitle.setText(editArticle.getTitle());
             edtExcerpt.setText(editArticle.getExcerpt());
-            edtContent.setText(editArticle.getExcerpt()); // hoặc getContent nếu có
-            // Load ảnh hiện có nếu có
+            edtContent.setText(editArticle.getExcerpt());
             if (editArticle.getImageUrl() != null && !editArticle.getImageUrl().isEmpty()) {
                 imgPreview.setVisibility(View.VISIBLE);
                 Glide.with(this).load(editArticle.getImageUrl()).into(imgPreview);
             } else {
                 imgPreview.setVisibility(View.GONE);
             }
-            // Category sẽ set sau khi load xong danh mục
         }
-        // Gọi API lấy danh mục
         ApiService.api.getCategories().enqueue(new retrofit2.Callback<List<com.example.prm392.model.NewsArticle.Category>>() {
             @Override
             public void onResponse(retrofit2.Call<List<com.example.prm392.model.NewsArticle.Category>> call, retrofit2.Response<List<com.example.prm392.model.NewsArticle.Category>> response) {
@@ -175,7 +171,6 @@ public class NewsManagementActivity extends AppCompatActivity {
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(NewsManagementActivity.this, android.R.layout.simple_spinner_item, categoryNames);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerCategory.setAdapter(adapter);
-                    // Nếu là sửa, set category đúng vị trí
                     if (editArticle != null && editArticle.getCategory() != null) {
                         for (int i = 0; i < categoryList.size(); i++) {
                             if (categoryList.get(i).getId() == editArticle.getCategory().getId()) {
@@ -209,7 +204,7 @@ public class NewsManagementActivity extends AppCompatActivity {
             req.setExcerpt(excerpt);
             req.setContent(content);
             req.setCategoryId(selectedCategory.getId());
-            req.setImageUrl(""); // Nếu có upload ảnh, truyền link ảnh, tạm thời để rỗng
+            req.setImageUrl("");
             if (editArticle == null) {
                 ApiService.api.createArticle(req).enqueue(new retrofit2.Callback<NewsArticle>() {
                     @Override
